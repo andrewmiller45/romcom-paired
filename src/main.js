@@ -30,6 +30,7 @@ makeCoverButton.addEventListener("click", createFormPage)
 viewSavedButton.addEventListener("click", viewSavedCovers)
 homeButton.addEventListener("click", goHome)
 createPosterButton.addEventListener("click", renderPoster)
+saveCoverButton.addEventListener("click", saveCover)
 
 
 // Create your event handlers and other functions here 👇
@@ -43,28 +44,28 @@ function generateRandomCover(){
   pageLoadRandom()
 }
 
-function pageLoadRandom(event){
+function pageLoadRandom(){
   mainCover.src = currentCover.cover
   mainTitle.innerText = currentCover.title
   mainTag1.innerText = currentCover.tagline1
   mainTag2.innerText = currentCover.tagline2
-  event.preventDefault()
 }
 
 function createFormPage(){
-  createForm.classList.toggle('hidden')
-  homeView.classList.toggle('hidden')
-  homeButton.classList.toggle('hidden')
-  newRandomButton.classList.toggle('hidden')
-  saveCoverButton.classList.toggle('hidden')
+  createForm.classList.remove('hidden')
+  savedView.classList.add('hidden')
+  homeView.classList.add('hidden')
+  homeButton.classList.remove('hidden')
+  newRandomButton.classList.add('hidden')
+  saveCoverButton.classList.add('hidden')
 }
 
 function viewSavedCovers(){
-  savedView.classList.toggle('hidden')
-  homeView.classList.toggle('hidden')
-  newRandomButton.classList.toggle('hidden')
-  saveCoverButton.classList.toggle('hidden')
-  homeButton.classList.toggle('hidden')
+  savedView.classList.remove('hidden')
+  homeView.classList.add('hidden')
+  newRandomButton.classList.add('hidden')
+  saveCoverButton.classList.add('hidden')
+  homeButton.classList.remove('hidden')
 
   // for (let i = 0; i < savedCovers.length; i++) {
   //   savedView.innerHTML += `<section class="main-cover">
@@ -78,25 +79,28 @@ function viewSavedCovers(){
 }
 
 function renderPoster(){
-  mainCover.src = userCover.value
-  mainTitle.innerText = userTitle.value
-  mainTag1.innerText = userDesc1.value
-  mainTag2.innerText = userDesc2.value
+
 }
 
 function goHome(){
-  homeView.classList.toggle('hidden')
-  homeButton.classList.toggle('hidden')
-  newRandomButton.classList.toggle('hidden')
-  saveCoverButton.classList.toggle('hidden')
+  homeView.classList.remove('hidden')
+  homeButton.classList.remove('hidden')
+  newRandomButton.classList.remove('hidden')
+  saveCoverButton.classList.remove('hidden')
   createForm.classList.add('hidden')
-  savedCovers.classList.add('hidden')
+  savedView.classList.add('hidden')
+  homeButton.classList.add('hidden')
+  generateRandomCover()
+}
+
+function saveCover(){
+  savedCovers.push(currentCover)
+  avoidDupes()
+  console.log(savedCovers);
 }
 
 function avoidDupes(){
-  if (!savedCovers.includes(currentCover)) {
-    savedCovers.push(currentCover)
-  }
+
 }
 
 //generate a new instance of a Cover every time the page loads.
