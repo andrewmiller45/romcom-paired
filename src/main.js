@@ -18,8 +18,6 @@ var userTitle = document.querySelector('.user-title')
 var userDesc1 = document.querySelector('.user-desc1')
 var userDesc2 = document.querySelector('.user-desc2')
 
-
-
 // We've provided a few variables below 
 var savedCovers = [];
 var currentCover;
@@ -29,7 +27,7 @@ newRandomButton.addEventListener("click", generateRandomCover)
 makeCoverButton.addEventListener("click", createFormPage)
 viewSavedButton.addEventListener("click", viewSavedCovers)
 homeButton.addEventListener("click", goHome)
-createPosterButton.addEventListener("click", renderPoster)
+createPosterButton.addEventListener("click", renderCover)
 saveCoverButton.addEventListener("click", saveCover)
 
 
@@ -63,23 +61,12 @@ function createFormPage(){
 function viewSavedCovers(){
   savedView.classList.remove('hidden')
   homeView.classList.add('hidden')
+  createForm.classList.add('hidden')
   newRandomButton.classList.add('hidden')
   saveCoverButton.classList.add('hidden')
   homeButton.classList.remove('hidden')
 
-  // for (let i = 0; i < savedCovers.length; i++) {
-  //   savedView.innerHTML += `<section class="main-cover">
-  //   <img class="cover-image" src="${savedCovers[i].cover}">
-  //   <h2 class="cover-title">${savedCovers[i].title}</h2>
-  //   <h3 class="tagline">A tale of <span class="tagline-1">${savedCovers[i].tagline1}</span> and <span class="tagline-2">${savedCovers[i].tagline2}</span></h3>
-  //   <img class="price-tag" src="./assets/price.png">
-  //   <img class="overlay" src="./assets/overlay.png">
-  // </section>`
-  // }
-}
-
-function renderPoster(){
-
+  renderSavedCovers()
 }
 
 function goHome(){
@@ -90,22 +77,50 @@ function goHome(){
   createForm.classList.add('hidden')
   savedView.classList.add('hidden')
   homeButton.classList.add('hidden')
-  generateRandomCover()
+}
+
+function addData(){
+  covers.push(userCover.value)
+  titles.push(userTitle.value)
+  descriptors.push(userDesc1.value)
+  descriptors.push(userDesc2.value)
+}
+
+function renderCover(e){
+  currentCover.cover = userCover.value
+  currentCover.title = userTitle.value
+  currentCover.tagline1 = userDesc1.value
+  currentCover.tagline2 = userDesc2.value
+
+  mainCover.src = userCover.value
+  mainTitle.innerText = userTitle.value
+  mainTag1.innerText = userDesc1.value
+  mainTag2.innerText = userDesc2.value
+  e.preventDefault()
+
+  goHome()
 }
 
 function saveCover(){
-  savedCovers.push(currentCover)
-  avoidDupes()
-  console.log(savedCovers);
+  if (!savedCovers.includes(currentCover)) {
+    savedCovers.push(currentCover)
+  }
+    resetForm()
 }
 
-function avoidDupes(){
+function resetForm(){
+  userCover.value = ''
+  userTitle.value = ''
+  userDesc1.value = ''
+  userDesc2.value = ''
+}
 
+renderSavedCovers(){
+  
 }
 
 //generate a new instance of a Cover every time the page loads.
 //generate a new instance of a Cover every time you click the show random button
 //
-
 
 generateRandomCover();
