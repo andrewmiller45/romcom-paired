@@ -17,6 +17,8 @@ var userCover = document.querySelector('.user-cover')
 var userTitle = document.querySelector('.user-title')
 var userDesc1 = document.querySelector('.user-desc1')
 var userDesc2 = document.querySelector('.user-desc2')
+var savedGrid = document.querySelector('.saved-covers-section')
+
 
 // We've provided a few variables below 
 var savedCovers = [];
@@ -65,8 +67,6 @@ function viewSavedCovers(){
   newRandomButton.classList.add('hidden')
   saveCoverButton.classList.add('hidden')
   homeButton.classList.remove('hidden')
-
-  renderSavedCovers()
 }
 
 function goHome(){
@@ -104,6 +104,8 @@ function renderCover(e){
 function saveCover(){
   if (!savedCovers.includes(currentCover)) {
     savedCovers.push(currentCover)
+    renderSavedCovers()
+    resetForm()
   }
     resetForm()
 }
@@ -115,8 +117,24 @@ function resetForm(){
   userDesc2.value = ''
 }
 
-renderSavedCovers(){
-  
+function renderSavedCovers() {
+  console.log(savedCovers);
+  for (let i = 0; i < savedCovers.length; i++) {
+    savedGrid.innerHTML += 
+    `<article class="mini-cover">
+        <img class="cover-image" src="${savedCovers[i].cover}">
+        <h2 class="cover-title">${savedCovers[i].title}</h2>
+        <h3 class="tagline">A tale of <span class="tagline-1">${savedCovers[i].tagline1}</span> and <span class="tagline-2">${savedCovers[i].tagline2}</span></h3>
+        <img class="price-tag" src="./assets/price.png">
+        <img class="overlay" src="./assets/overlay.png">
+    </article>`  
+  }
+}
+
+function deleteCover(){
+  //double click
+  //match cover by id
+  //splice from array
 }
 
 //generate a new instance of a Cover every time the page loads.
