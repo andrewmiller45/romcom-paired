@@ -31,7 +31,7 @@ viewSavedButton.addEventListener("click", viewSavedCovers)
 homeButton.addEventListener("click", goHome)
 createPosterButton.addEventListener("click", renderCover)
 saveCoverButton.addEventListener("click", saveCover)
-
+savedGrid.addEventListener("dblclick", deleteCover)
 
 // Create your event handlers and other functions here 👇
 function getRandomIndex(array) {
@@ -87,18 +87,28 @@ function addData(){
 }
 
 function renderCover(e){
-  currentCover.cover = userCover.value
-  currentCover.title = userTitle.value
-  currentCover.tagline1 = userDesc1.value
-  currentCover.tagline2 = userDesc2.value
+  if (!userCover.value || userTitle.value || userDesc1.value || userDesc2.value) {
+    return alert `you need romanace, baby`
+  }
+    currentCover.cover = userCover.value
+    currentCover.title = userTitle.value
+    currentCover.tagline1 = userDesc1.value
+    currentCover.tagline2 = userDesc2.value
 
-  mainCover.src = userCover.value
-  mainTitle.innerText = userTitle.value
-  mainTag1.innerText = userDesc1.value
-  mainTag2.innerText = userDesc2.value
-  e.preventDefault()
+    mainCover.src = userCover.value
+    mainTitle.innerText = userTitle.value
+    mainTag1.innerText = userDesc1.value
+    mainTag2.innerText = userDesc2.value
+    e.preventDefault()
+    resetForm()
+    goHome()
+}
 
-  goHome()
+function resetForm(){
+  userCover.value = ''
+  userTitle.value = ''
+  userDesc1.value = ''
+  userDesc2.value = ''
 }
 
 function saveCover(){
@@ -110,19 +120,12 @@ function saveCover(){
     resetForm()
 }
 
-function resetForm(){
-  userCover.value = ''
-  userTitle.value = ''
-  userDesc1.value = ''
-  userDesc2.value = ''
-}
-
 function renderSavedCovers() {
-  console.log(savedCovers);
+  savedGrid.innerHTML = ""
   for (let i = 0; i < savedCovers.length; i++) {
     savedGrid.innerHTML += 
     `<article class="mini-cover">
-        <img class="cover-image" src="${savedCovers[i].cover}">
+        <img class="cover-image" id="${savedCovers[i].id}" src="${savedCovers[i].cover}">
         <h2 class="cover-title">${savedCovers[i].title}</h2>
         <h3 class="tagline">A tale of <span class="tagline-1">${savedCovers[i].tagline1}</span> and <span class="tagline-2">${savedCovers[i].tagline2}</span></h3>
         <img class="price-tag" src="./assets/price.png">
@@ -131,10 +134,13 @@ function renderSavedCovers() {
   }
 }
 
-function deleteCover(){
-  //double click
-  //match cover by id
-  //splice from array
+function deleteCover(e){
+  for (let i = 0; i < savedCovers.length; i++) {
+    if (savedCovers[i].id == e.target.id) {
+      savedCovers.splice(i,1)
+      renderSavedCovers()
+    }
+  }
 }
 
 //generate a new instance of a Cover every time the page loads.
