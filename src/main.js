@@ -11,7 +11,11 @@ var formView = document.querySelector('.form-view')
 var homeView = document.querySelector('.home-view')
 var goHome = document.querySelector('.home-button')
 var savedView = document.querySelector('.saved-view')
-// var newBook = document.querySelector('.create-new-book-button')
+var newBook = document.querySelector('.create-new-book-button')
+var userCover = document.querySelector('.user-cover');
+var descriptorOne = document.querySelector('.user-desc1')
+var descriptorTwo = document.querySelector('.user-desc2')
+var userTitle = document.querySelector('.user-title')
 
 // We've provided a few variables below
 var savedCovers = [
@@ -24,6 +28,11 @@ newRandom.addEventListener("click", generateRandomCover);
 makeCover.addEventListener("click", displayFormView);
 goHome.addEventListener("click", displayHomeView);
 viewSaved.addEventListener("click", displaySavedView);
+newBook.addEventListener("click", newCoverView);
+userCover.addEventListener("input", createCover);
+descriptorOne.addEventListener("input", createCover);
+descriptorTwo.addEventListener("input", createCover);
+userTitle.addEventListener("input", createCover);
 
 // Create your event handlers and other functions here 👇
 function getRandomIndex(array) {
@@ -31,8 +40,10 @@ function getRandomIndex(array) {
 }
 
 function generateRandomCover(){
-  currentCover = new Cover(covers[getRandomIndex(covers)], titles[getRandomIndex(titles)], descriptors[getRandomIndex(descriptors)], descriptors[getRandomIndex(descriptors)])
-  console.log(currentCover);
+  currentCover = new Cover(covers[getRandomIndex(covers)],
+  titles[getRandomIndex(titles)],
+  descriptors[getRandomIndex(descriptors)],
+  descriptors[getRandomIndex(descriptors)])
 
   pageLoadRandom()
 }
@@ -43,19 +54,22 @@ function pageLoadRandom(){
   mainTag1.innerText = currentCover.tagline1
   mainTag2.innerText = currentCover.tagline2
 }
-function displayFormView(){
-  formView.classList.toggle('hidden');
-  newRandom.classList.toggle('hidden');
-  saveCover.classList.toggle('hidden');
-  homeView.classList.toggle('hidden');
-  goHome.classList.toggle('hidden');
+function displayFormView(event){
+  event.preventDefault();
+  formView.classList.remove('hidden');
+  newRandom.classList.add('hidden');
+  saveCover.classList.add('hidden');
+  homeView.classList.add('hidden');
+  goHome.classList.remove('hidden');
+  savedView.classList.add('hidden');
 }
 function displayHomeView(){
-  homeView.classList.toggle('hidden');
-  formView.classList.toggle('hidden');
-  goHome.classList.toggle('hidden');
-  newRandom.classList.toggle('hidden');
-  saveCover.classList.toggle('hidden');
+  homeView.classList.remove('hidden');
+  formView.classList.add('hidden');
+  goHome.classList.add('hidden');
+  newRandom.classList.remove('hidden');
+  saveCover.classList.remove('hidden');
+  savedView.classList.add('hidden')
 }
 
 //view saved covers button clicks to switch page display to
@@ -63,11 +77,27 @@ function displayHomeView(){
 //show random cover and save cover buttons should be hidden
 
 function displaySavedView(){
-  homeView.classList.toggle('hidden');
-  newRandom.classList.toggle('hidden');
-  saveCover.classList.toggle('hidden');
-  savedView.classList.toggle('hidden');
-  goHome.classList.toggle('hidden');
+  homeView.classList.add('hidden');
+  newRandom.classList.add('hidden');
+  saveCover.classList.add('hidden');
+  savedView.classList.remove('hidden');
+  goHome.classList.remove('hidden');
+  formView.classList.add('hidden');
+}
+function newCoverView(){
+  formView.classList.add('hidden');
+  savedView.classList.add('hidden');
+  homeView.classList.remove('hidden');
+  newBook.classList.remove('hidden');
+  makeNewCover();
+  event.preventDefault(newRandom);
+}
+function makeNewCover(){
+  mainCover.src = makeNewCover.userCover
+  mainTitle.innerText = makeNewCover.userTitle
+  mainTag1.innerText = makeNewCover.descriptorOne
+  mainTag2.innerText = makeNewCover.descriptorTwo
+  event.preventDefault(newRandom);
 }
 
 //**find a way to ensure toggle is controlled
