@@ -12,10 +12,7 @@ var homeView = document.querySelector('.home-view')
 var goHome = document.querySelector('.home-button')
 var savedView = document.querySelector('.saved-view')
 var newBook = document.querySelector('.create-new-book-button')
-var userCover = document.querySelector('.user-cover');
-var descriptorOne = document.querySelector('.user-desc1')
-var descriptorTwo = document.querySelector('.user-desc2')
-var userTitle = document.querySelector('.user-title')
+
 
 // We've provided a few variables below
 var savedCovers = [
@@ -28,11 +25,11 @@ newRandom.addEventListener("click", generateRandomCover);
 makeCover.addEventListener("click", displayFormView);
 goHome.addEventListener("click", displayHomeView);
 viewSaved.addEventListener("click", displaySavedView);
-newBook.addEventListener("click", newCoverView);
-userCover.addEventListener("input", createCover);
-descriptorOne.addEventListener("input", createCover);
-descriptorTwo.addEventListener("input", createCover);
-userTitle.addEventListener("input", createCover);
+newBook.addEventListener("click", createNewCover);
+// // userCover.addEventListener("input", createCover);
+// descriptorOne.addEventListener("input", createCover);
+// descriptorTwo.addEventListener("input", createCover);
+// userTitle.addEventListener("input", createCover);
 
 // Create your event handlers and other functions here 👇
 function getRandomIndex(array) {
@@ -44,7 +41,6 @@ function generateRandomCover(){
   titles[getRandomIndex(titles)],
   descriptors[getRandomIndex(descriptors)],
   descriptors[getRandomIndex(descriptors)])
-
   pageLoadRandom()
 }
 
@@ -54,8 +50,7 @@ function pageLoadRandom(){
   mainTag1.innerText = currentCover.tagline1
   mainTag2.innerText = currentCover.tagline2
 }
-function displayFormView(event){
-  event.preventDefault();
+function displayFormView(){
   formView.classList.remove('hidden');
   newRandom.classList.add('hidden');
   saveCover.classList.add('hidden');
@@ -63,7 +58,7 @@ function displayFormView(event){
   goHome.classList.remove('hidden');
   savedView.classList.add('hidden');
 }
-function displayHomeView(){
+function displayHomeView(event){
   homeView.classList.remove('hidden');
   formView.classList.add('hidden');
   goHome.classList.add('hidden');
@@ -84,23 +79,57 @@ function displaySavedView(){
   goHome.classList.remove('hidden');
   formView.classList.add('hidden');
 }
-function newCoverView(){
+function createCover(){
   formView.classList.add('hidden');
   savedView.classList.add('hidden');
   homeView.classList.remove('hidden');
   newBook.classList.remove('hidden');
-  makeNewCover();
-  event.preventDefault(newRandom);
 }
-function makeNewCover(){
-  mainCover.src = makeNewCover.userCover
-  mainTitle.innerText = makeNewCover.userTitle
-  mainTag1.innerText = makeNewCover.descriptorOne
-  mainTag2.innerText = makeNewCover.descriptorTwo
-  event.preventDefault(newRandom);
+function createNewCover(){
+  event.preventDefault();
+  this.cover = getCoverData();
+  addCoverItemsToArray(this.cover.cover, this.cover.title, this.cover.descriptor, this.cover.descriptor)
+  showNewCover(this.cover);
+
+  // currentCover.src = userCover.value;
+  // currentCover.innerText = userTitle.value;
+  // currentCover.innerText = descriptorOne.value;
+  // currentCover.innerText = descriptorTwo.value;
+  // //
+  // mainCover.src = userCover.value;
+  // mainTitle.innerText = userTitle.value;
+  // mainTag1.innerText = descriptorOne.value;
+  // mainTag2.innerText = descriptorTwo.value;
 }
 
-//**find a way to ensure toggle is controlled
-// (i.e. the ViewSavedCovers & MakeYourOwnCover are currently being swapped dependant upon which order clicked)
-// preventDefault(displayFormView(), displayHomeView(), displaySavedView());
+function addCoverItemsToArray (cover, title, descriptor, descriptor2){
+  covers.push(cover);
+  titles.push(title);
+  descriptors.push(descriptor, descriptor2)
+}
+
+function getCoverData(){
+  var userCover = document.querySelector('.user-cover').value;
+  var descriptorOne = document.querySelector('.user-desc1').value;
+  var descriptorTwo = document.querySelector('.user-desc2').value;
+  var userTitle = document.querySelector('.user-title').value;
+  currentCover = new Cover (userCover, userTitle, descriptorOne, descriptorTwo);
+  return currentCover;
+}
+function showNewCover(cover){
+  formView.classList.add('hidden');
+  savedView.classList.add('hidden');
+  homeView.classList.remove('hidden');
+  newBook.classList.remove('hidden');
+  mainCover.src = cover.cover;
+  mainTitle.innerText = cover.title;
+  mainTag1.innerText = cover.tagline1;
+  mainTag2.innerText = cover.tagline2;
+}
+
+
+//create a button for "save cover",create an event listener to perform
+//on "click" to save the current cover to the "savedcovers" array (above)
+//will save to the saved covers array.
+
 generateRandomCover();
