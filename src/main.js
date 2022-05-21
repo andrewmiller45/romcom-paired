@@ -87,7 +87,7 @@ function addData(){
 }
 
 function renderCover(e){
-  if (!userCover.value || userTitle.value || userDesc1.value || userDesc2.value) {
+  if (userCover.value === "" || userTitle.value === "" || userDesc1.value === "" || userDesc2.value === "") {
     return alert `you need romanace, baby`
   }
     currentCover.cover = userCover.value
