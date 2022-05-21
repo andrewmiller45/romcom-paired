@@ -143,8 +143,4 @@ function deleteCover(e){
   }
 }
 
-//generate a new instance of a Cover every time the page loads.
-//generate a new instance of a Cover every time you click the show random button
-//
-
 generateRandomCover();
