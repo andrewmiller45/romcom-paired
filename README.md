@@ -1,13 +1,57 @@
-# RomCom
+# Rom-Com 
 
-A boilerplate repo. 
+## Table of Contents
+  - [Introduction](#introduction)
+  - [Technologies](#technologies)
+  - [Features](#features)
+  - [Deployed Page](#deployed-page)
+  - [Set Up](#set-up)
+  - [Organizational Resources](#organizational-resources)
+  - [Sources](#sources)
+  - [Contributors](#contributors)
+  - [Project Specs](#project-specs)
+
+## Introduction
+  - The purpose of this project was to allow students to practice some of the foundational concepts learned so far within the module. There are other extensions that test different skills that we can build on. The project allowed us to focus on event listeners, query selectors, and DOM manipulation.
+
+## Technologies
+  - Javascript
+  - HTML
+
+## Features
+- Randomize a new Romance novel cover.
+- Create your own cover by inputting your own values.
+- Save covers to its own page.
+
+## Deployed Page
+
+Visit our published RomCom Site! [here](https://andrewmiller45.github.io/romcom-paired/)
 
 ## Set Up
-1. ONE teammate: fork this boilerplate repository 
-2. Clone down your new, forked repo
-3. cd into the repository
-4. Open it in your text editor
-5. View the project in the browser by running open index.html in your terminal
-6. Add all project partners and your assigned instructor as collaborators on the repository
 
-The project spec & rubric can be found [here](https://frontend.turing.io/projects/module-1/romcom-pair.html)
+1. Fork this repo  
+2. Clone the repo to your local machine
+3. View the project in the browser by running open index.html in your terminal.
+
+
+
+## Sources
+  - [MDN](http://developer.mozilla.org/en-US/)
+  -[YouTube](https://www.youtube.com/)
+  - [W3Schools](https://www.w3schools.com/)
+
+## Contributors
+  - [Andrew Miller](https://github.com/andrewmiller45)
+
+
+## Project Specs
+  - The project spec & rubric can be found [here](https://frontend.turing.edu/projects/module-1/romcom-pair-v2.html)
+
+
+
+
+
+
+
+
+
