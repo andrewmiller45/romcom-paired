@@ -87,8 +87,9 @@ function addData(){
 }
 
 function renderCover(e){
+  e.preventDefault()
   if (userCover.value === "" || userTitle.value === "" || userDesc1.value === "" || userDesc2.value === "") {
-    return alert `you need romanace, baby`
+    return alert `You are missing fields!  Please enter a value into each form`
   }
     currentCover.cover = userCover.value
     currentCover.title = userTitle.value
@@ -99,7 +100,7 @@ function renderCover(e){
     mainTitle.innerText = userTitle.value
     mainTag1.innerText = userDesc1.value
     mainTag2.innerText = userDesc2.value
-    e.preventDefault()
+    // e.preventDefault()
     resetForm()
     goHome()
 }
@@ -124,13 +125,13 @@ function renderSavedCovers() {
   savedGrid.innerHTML = ""
   for (let i = 0; i < savedCovers.length; i++) {
     savedGrid.innerHTML += 
-    `<article class="mini-cover">
+    `<section class="mini-cover">
         <img class="cover-image" id="${savedCovers[i].id}" src="${savedCovers[i].cover}">
         <h2 class="cover-title">${savedCovers[i].title}</h2>
         <h3 class="tagline">A tale of <span class="tagline-1">${savedCovers[i].tagline1}</span> and <span class="tagline-2">${savedCovers[i].tagline2}</span></h3>
         <img class="price-tag" src="./assets/price.png">
         <img class="overlay" src="./assets/overlay.png">
-    </article>`  
+    </section>`  
   }
 }
 
