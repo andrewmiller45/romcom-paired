@@ -17,6 +17,7 @@
 ## Technologies
   - Javascript
   - HTML
+  - CSS
 
 ## Features
 - Randomize a new Romance novel cover.
