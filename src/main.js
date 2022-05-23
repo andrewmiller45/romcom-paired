@@ -138,6 +138,7 @@ function renderSavedCovers() {
 function deleteCover(e){
   for (let i = 0; i < savedCovers.length; i++) {
     if (savedCovers[i].id == e.target.id) {
+      console.log(e.target)
       savedCovers.splice(i,1)
       renderSavedCovers()
     }
