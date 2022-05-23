@@ -12,11 +12,11 @@ var homeView = document.querySelector('.home-view')
 var goHome = document.querySelector('.home-button')
 var savedView = document.querySelector('.saved-view')
 var newBook = document.querySelector('.create-new-book-button')
-
+var coversSaved = document.querySelector('.saved-covers-section')
 
 // We've provided a few variables below
 var savedCovers = [
-  new Cover("http://3.bp.blogspot.com/-iE4p9grvfpQ/VSfZT0vH2UI/AAAAAAAANq8/wwQZssi-V5g/s1600/Do%2BNot%2BForsake%2BMe%2B-%2BImage.jpg", "Sunsets and Sorrows", "sunsets", "sorrows")
+  // new Cover("http://3.bp.blogspot.com/-iE4p9grvfpQ/VSfZT0vH2UI/AAAAAAAANq8/wwQZssi-V5g/s1600/Do%2BNot%2BForsake%2BMe%2B-%2BImage.jpg", "Sunsets and Sorrows", "sunsets", "sorrows")
 ];
 var currentCover;
 
@@ -26,10 +26,9 @@ makeCover.addEventListener("click", displayFormView);
 goHome.addEventListener("click", displayHomeView);
 viewSaved.addEventListener("click", displaySavedView);
 newBook.addEventListener("click", createNewCover);
-// // userCover.addEventListener("input", createCover);
-// descriptorOne.addEventListener("input", createCover);
-// descriptorTwo.addEventListener("input", createCover);
-// userTitle.addEventListener("input", createCover);
+saveCover.addEventListener("click", addSavedCover);
+coversSaved.addEventListener("dblclick", deleteSavedCover);
+
 
 // Create your event handlers and other functions here 👇
 function getRandomIndex(array) {
@@ -78,6 +77,7 @@ function displaySavedView(){
   savedView.classList.remove('hidden');
   goHome.classList.remove('hidden');
   formView.classList.add('hidden');
+  saveCurrentCover();
 }
 function createCover(){
   formView.classList.add('hidden');
@@ -126,7 +126,32 @@ function showNewCover(cover){
   mainTag1.innerText = cover.tagline1;
   mainTag2.innerText = cover.tagline2;
 }
+function addSavedCover(){
+  if (!savedCovers.includes(currentCover)){
+  savedCovers.push(currentCover);
+  }
+}
 
+function saveCurrentCover(){
+  coversSaved.innerHTML = "";
+  for (i = 0; i < savedCovers.length; i++) {
+  coversSaved.innerHTML +=
+  `   <section class="mini-cover">
+      <img class="cover-image" id= ${savedCovers[i].id} src= ${savedCovers[i].cover}>
+      <h2 class="cover-title">${savedCovers[i].title}</h2>
+      <h3 class="tagline">A tale of <span class="tagline-1">${savedCovers[i].tagline1}</span> and <span class="tagline-2">${savedCovers[i].tagline2}</span></h3>
+      <img class="price-tag" src="./assets/price.png">
+      <img class="overlay" src="./assets/overlay.png"> `
+  }
+}
+function deleteSavedCover(){
+  for (i = 0; i < savedCovers.length; i++) {
+    if (savedCovers[i].id == event.target.id){
+      savedCovers.splice(i,1)
+      saveCurrentCover();
+    }
+  }
+}
 
 //create a button for "save cover",create an event listener to perform
 //on "click" to save the current cover to the "savedcovers" array (above)
