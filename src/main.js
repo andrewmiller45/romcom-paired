@@ -144,7 +144,7 @@ function saveCurrentCover(){
       <img class="overlay" src="./assets/overlay.png"> `
   }
 }
-function deleteSavedCover(){
+function deleteSavedCover(event){
   for (i = 0; i < savedCovers.length; i++) {
     if (savedCovers[i].id == event.target.id){
       savedCovers.splice(i,1)
